@@ -1,13 +1,27 @@
 
 %%
 %Anzahl an Fasern die Kraft erzeugen über sigma
-for n = 0 : 1 : 10
+numMU_low=zeros(1,11)+121;
+numMU_high=zeros(1,11)+121;
+for n = 0 : 0.01 : 0.1
     tmp_pointer=1;
     load(strcat('c:/Users/mcjacob/Google Drive/Masterarbeit/Matlab/',...
         'res_v01/MA_SO_pPS_Noise0_c106_',num2str(n),'.mat'),'forces');
     for k=1:121
         if forces(k,:)==0 & tmp_pointer==1
-            sigma(n+1)=k;
+            numMU((n*100)+1)=k;
+            tmp_pointer=0;
+        end
+    end
+end
+    
+for n = 1 : 1 : 10
+    tmp_pointer=1;
+    load(strcat('c:/Users/mcjacob/Google Drive/Masterarbeit/Matlab/',...
+        'res_v01/MA_SO_pPS_Noise0_c106_',num2str(n),'.mat'),'forces');
+    for k=1:121
+        if forces(k,:)==0 & tmp_pointer==1
+            numMU(n)=k;
             tmp_pointer=0;
         end
     end
