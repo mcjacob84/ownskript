@@ -35,10 +35,9 @@ function [signal,force,forces]= myShorten(Data, isNoise, maxStim, minStim)
     m.System.setConfig(m.DefaultMu,2);
     p=models.motorunit.Pool(2,m);
     p.FibreTypes=0:0.0083:1;
-    [force,forces]=p.simulate(1,signal.totalTime,1);
+    [force, forces, tmp_t, y, tmp_sec, tmp_x]=p.simulate(1,signal.totalTime,1);
 end
 
 function [stim]=f_getStim(t,s)
     stim=interp1(s.Time,s.Data,t);
 end
-

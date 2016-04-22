@@ -1,15 +1,15 @@
 
 %%
 %Anzahl an Fasern die Kraft erzeugen über sigma
-numMU_low=zeros(1,11)+121;
-numMU_high=zeros(1,11)+121;
-for n = 0 : 0.01 : 0.1
+numMU_low=zeros(1,10)+121;
+numMU_high=zeros(1,10)+121;
+for n = 0 : 0.01 : 0.09
     tmp_pointer=1;
     load(strcat('c:/Users/mcjacob/Google Drive/Masterarbeit/Matlab/',...
-        'res_v01/MA_SO_pPS_Noise0_c106_',num2str(n),'.mat'),'forces');
+        'res_v01/MA_SN_pPS_Noise0_c106_',num2str(n),'.mat'),'forces');
     for k=1:121
         if forces(k,:)==0 & tmp_pointer==1
-            numMU((n*100)+1)=k;
+            numMU_low((n*100)+1)=k;
             tmp_pointer=0;
         end
     end
@@ -18,14 +18,17 @@ end
 for n = 1 : 1 : 10
     tmp_pointer=1;
     load(strcat('c:/Users/mcjacob/Google Drive/Masterarbeit/Matlab/',...
-        'res_v01/MA_SO_pPS_Noise0_c106_',num2str(n),'.mat'),'forces');
+        'res_v01/MA_SN_pPS_Noise0_c106_',num2str(n),'.mat'),'forces');
     for k=1:121
         if forces(k,:)==0 & tmp_pointer==1
-            numMU(n)=k;
+            numMU_high(n)=k;
             tmp_pointer=0;
         end
     end
 end
+
+sigma=[0,0.01,0.02,0.03,0.04,0.05,0.06,0.07,0.08,0.09,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1];
+numMU=[numMU_low,numMU_high];
 %%
 %Grafik Allgemeines Verhalten phModell
 figure

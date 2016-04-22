@@ -1,7 +1,7 @@
 function [force] = f_startShortenSO( data, isNoise, in )
-% cd kermor/
-% KerMor.start
-% cd ..
+cd kermor/
+KerMor.start
+cd ..
 
 switch data
     case 1
@@ -27,7 +27,6 @@ function [signal,force,forces]= myShorten(Data, isNoise, maxStim, minStim)
     signal.Time = signal.Time*1000;
     signal.totalTime=signal.totalTime*1000;
     stim=@(t)(f_getStim(t,signal)*8.3603*maxStim);
-%     stim=@(t)(f_getStim(t,signal)*10*maxStim);
     m=models.motorunit.Shorten('SarcoVersion',1);
     m.System.f.LinkSarcoMoto=1;
     m.UseNoise=isNoise;
@@ -35,20 +34,10 @@ function [signal,force,forces]= myShorten(Data, isNoise, maxStim, minStim)
     m.System.Inputs{2}=stim;
     m.System.setConfig(m.DefaultMu,2);
     p=models.motorunit.Pool(2,m);
-%     p.FibreTypes=0:0.0083:1;
-    p.FibreTypes=0:1:1;
-    [force,forces]=p.simulate(1,signal.totalTime,1);
+    p.FibreTypes=0:0.0083:1;
+    [force,forces, tmp_t, y, tmp_sec, tmp_x]=p.simulate(1,signal.totalTime,1);
 end
 
 function [stim]=f_getStim(t,s)
     stim=interp1(s.Time,s.Data,t);
 end
-%%
-%trasshcan
-%{
-%2sOns2Off
-disp('Version3N_Off')
-maxStim=in;
-[signal,force,forces]=f_myShorten(6,0,maxStim);
-save(strcat('preProcShorten_2sOn_2sOff_NoiseOFF_maxStim',num2str(maxStim),'.mat'));
-%}

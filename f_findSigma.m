@@ -3,10 +3,11 @@ function [ HvSerr ] = f_findSigma( sigma )
 %start with: [sigma,fval]=fminsearch(@f_findSigma,1);    
     
     %cfg
-    stim = 7;
+    stim = 0.08;
     isNoise = 1;
     
-    %load Shorten
+    %load Shorten 
+    %Einzelheiten anpassen (SO, SN)
     load(strcat('C:/Users/mcjacob/Google Drive/Masterarbeit/Matlab/res_v01/MA_SN_pPS_Noise', ...
         num2str(isNoise),'_c106_',num2str(stim),'.mat'),'forces');
     force=f_normShorten_SNF0(f_myPool(forces),isNoise);
