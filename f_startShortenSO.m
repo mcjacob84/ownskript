@@ -1,15 +1,15 @@
 function [force] = f_startShortenSO( data, isNoise, in )
-cd kermor/
-KerMor.start
-cd ..
+% cd kermor/
+% KerMor.start
+% cd ..
 
 switch data
     case 1
-        disp(strcat('SO_c',num2str(data),'_N_', num2str(isNoise),'+STATES'));
+        disp(strcat('SO_c',num2str(data),'_N_', num2str(isNoise),'+ALLSTATES'));
         [signal,force,forces, tmp_t, y, tmp_sec, tmp_x]=myShorten(data,isNoise,in,0);
         save(strcat('MA_SO_pPS_Noise',num2str(isNoise),'_c',num2str(data),'_',num2str(in),'.mat'));
     case 106
-        disp(strcat('SO_c',num2str(data),'_N_', num2str(isNoise),'+STATES'));
+        disp(strcat('SO_c',num2str(data),'_N_', num2str(isNoise),'+ALLSTATES'));
         [signal,force,forces, tmp_t, y, tmp_sec, tmp_x]=myShorten(data,isNoise,in,0);
         save(strcat('MA_SO_pPS_Noise',num2str(isNoise),'_c',num2str(data),'_',num2str(in),'.mat'));
     %{

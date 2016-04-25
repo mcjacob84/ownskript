@@ -5,11 +5,11 @@ cd ..
 
 switch data
     case 1
-        disp(strcat('SN_c',num2str(data),'_N_', num2str(isNoise),'+STATES'));
+        disp(strcat('SN_c',num2str(data),'_N_', num2str(isNoise),'+ALLSTATES'));
         [signal,force,forces, tmp_t, y, tmp_sec, tmp_x]=myShorten(data,isNoise,in,0);
         save(strcat('MA_SN_pPS_Noise',num2str(isNoise),'_c',num2str(data),'_',num2str(in),'.mat'));
     case 106
-        disp(strcat('SN_c',num2str(data),'_N_', num2str(isNoise),'+STATES'));
+        disp(strcat('SN_c',num2str(data),'_N_', num2str(isNoise),'+ALLSTATES'));
         [signal,force,forces, tmp_t, y, tmp_sec, tmp_x]=myShorten(data,isNoise,in,0);
         save(strcat('MA_SN_pPS_Noise',num2str(isNoise),'_c',num2str(data),'_',num2str(in),'.mat'));
     %{
