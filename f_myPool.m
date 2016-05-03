@@ -9,15 +9,12 @@ function [ force ] = f_myPool( forces )
     for n = 1:wid   
         force(1,:)=force(1,:)+(forces(n,:)*P(1,n));
     end
-    
 end
 
 function [ P ] = f_getExp( const, wid )
 %Beruecksichtigung Groessenordnung der Motoneuronen nach Fuglevand
-P = zeros(1,wid);
-for n = 1 : wid
-    P(1,n) = exp(log(const)*(n-1)/(wid-1)); 
-%     P(1,n) = exp(log(const)*(n-1)*0.0083/1);
-end
-
+    P = zeros(1,wid);
+    for n = 1 : wid
+        P(1,n) = exp(log(const)*(n-1)/(wid-1)); 
+    end
 end

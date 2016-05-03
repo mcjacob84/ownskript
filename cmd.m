@@ -1,4 +1,31 @@
+%CoV des iterstimulusinterval
+%function f_findPeak
 
+%cfg
+stim=0.1;
+isNoise=0;
+startt=15001;%Startzeit in [ms]
+stopt=20001;%Stopzeit in [ms]
+numMU=121;%Muskelfasertyp
+
+%load data
+load(strcat('SO_firetimes_Stim',num2str(stim),'_Noise',num2str(isNoise),'.mat'));
+
+edges=f_findPeak(firetimes(numMU,startt:stopt));
+%CoV berechnen
+for n=1:length(edges)-1
+    diffedges(n)=edges(n+1)-edges(n);
+end
+s=std(diffedges);
+m=mean(diffedges);
+CoV=s/m;
+
+%plot.this.stuff
+plot(firetimes(numMU,startt:stopt),'r')
+hold on
+for n = 1 : length(edges)
+    line([edges(n) edges(n)], [0 50])
+end
 %%
 %Anzahl an Fasern die Kraft erzeugen über sigma
 numMU_low=zeros(1,10)+121;
