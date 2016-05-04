@@ -1,16 +1,15 @@
 function [ HvSerr ] = f_findSigma( sigma )
 %method to translate sigma from Hatze to Shorten
-%start with: [sigma,fval]=fminsearch(@f_findSigma,1);    
+%start with: [sigma,fval]=fminsearch(@f_findSigma,1)  
     
     %cfg
-    stim = 0.08;
+    stim = 0.39;
     isNoise = 1;
     
     %load Shorten 
     %Einzelheiten anpassen (SO, SN)
-    load(strcat('C:/Users/mcjacob/Google Drive/Masterarbeit/Matlab/res_v01/MA_SN_pPS_Noise', ...
-        num2str(isNoise),'_c106_',num2str(stim),'.mat'),'forces');
-    force=f_normShorten_SNF0(f_myPool(forces),isNoise);
+    load(strcat('SO_forces_Stim',num2str(stim),'_Noise',num2str(isNoise),'.mat'));
+    force=f_normShorten_SOF0(f_myPool(forces),isNoise);
     
     %load Hatze
     [~,T,q,~] = myHatze(106,sigma,0,11,4.4525,3);

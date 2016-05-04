@@ -1,3 +1,37 @@
+function [CoV] = peakFinder()
+    %CoV des iterstimulusinterval
+
+    %cfg
+    stim=0.21;
+    isNoise=1;
+    startt=15001;%Startzeit in [ms]
+    stopt=20001;%Stopzeit in [ms]
+    numMU=121;%Muskelfasertyp
+
+    %load data
+    load(strcat('SO_firetimes_Stim',num2str(stim),'_Noise',num2str(isNoise),'.mat'));
+
+    edges=f_findPeak(firetimes(numMU,startt:stopt));
+
+    diffedges = zeros(1,length(edges)-1);
+
+    %CoV berechnen
+    for n=1:length(edges)-1
+        diffedges(n)=edges(n+1)-edges(n);
+    end
+    s=std(diffedges);
+    m=mean(diffedges);
+    CoV=s/m*100;
+
+    %plot.this.stuff
+    plot(firetimes(numMU,startt:stopt),'r')
+    hold on
+    for n = 1 : length(edges)
+        line([edges(n) edges(n)], [0 50])
+    end
+end
+
+
 function [edges] = f_findPeak( firetimes )
 
     %cfg
