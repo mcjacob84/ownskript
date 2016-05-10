@@ -1,5 +1,38 @@
 
 %%
+%Lese Zeilenweise (über Stimlation) die ganzen Zahlen aus und bilde
+%m/s/CoV
+
+%init
+load('CoV_firetimes_SOF0N1_1.mat');
+CoV=ans;
+tmp_m=zeros(length(CoV(:,1)),1);
+tmp_s=zeros(length(CoV(:,1)),1);
+tmp_CoV=zeros(length(CoV(:,1)),1);
+tmp_Pointer_CoV=1;
+
+%copy cells
+for n = 1 : length(CoV(:,1))
+    vector=zeros(1,1);
+    tmp_pointer=1;
+    for m = 1 : 121
+        tmp_eintrag=CoV(n,m);
+        if isnan(tmp_eintrag)
+            %do nothing
+        else
+           vector(tmp_pointer)=tmp_eintrag;
+           tmp_pointer=tmp_pointer+1;
+        end
+    end
+    if length(vector)>1
+        tmp_m(n)=mean(vector);
+        tmp_s(n)=std(vector);
+        tmp_CoV(tmp_Pointer_CoV)=tmp_s(n)/tmp_m(n)*100;
+    end
+    tmp_Pointer_CoV=tmp_Pointer_CoV+1;
+end
+
+%%
 %Grafik Allgemeines Verhalten phModell
 figure
 for s = 0:0.1:1
