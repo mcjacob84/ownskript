@@ -1,35 +1,44 @@
 
 %%
-%Lese Zeilenweise (über Stimlation) die ganzen Zahlen aus und bilde
-%m/s/CoV
-
+%Neues Projekt
+%->1. Schritt
+%Matrix mit firetimes über die Stimulationen hinweg
 %init
-load('CoV_firetimes_SOF0N1_1.mat');
-CoV=ans;
-tmp_m=zeros(length(CoV(:,1)),1);
-tmp_s=zeros(length(CoV(:,1)),1);
-tmp_CoV=zeros(length(CoV(:,1)),1);
-tmp_Pointer_CoV=1;
+cfg.dataSet={'firetimes','mfpot'};
+cfg.isNoise=1;
 
-%copy cells
-for n = 1 : length(CoV(:,1))
-    vector=zeros(1,1);
-    tmp_pointer=1;
-    for m = 1 : 121
-        tmp_eintrag=CoV(n,m);
-        if isnan(tmp_eintrag)
-            %do nothing
-        else
-           vector(tmp_pointer)=tmp_eintrag;
-           tmp_pointer=tmp_pointer+1;
+for l=1:length(cfg.dataSet)
+    for stim=0:0.01:0.4
+        load(strcat('SO_',cfg.dataSet{l},'_Stim',num2str(stim),'_Noise',num2str(cfg.isNoise),'.mat'));
+        
+        for fibretype = 1:121
+            firetimes{round((stim*100)+1)}(fibretype,:)=f_peakFinder_FT(stim,fibretype);
         end
     end
-    if length(vector)>1
-        tmp_m(n)=mean(vector);
-        tmp_s(n)=std(vector);
-        tmp_CoV(tmp_Pointer_CoV)=tmp_s(n)/tmp_m(n)*100;
-    end
-    tmp_Pointer_CoV=tmp_Pointer_CoV+1;
+end
+
+
+
+
+%%
+%%%%%%%%%%%%%
+% % % % % % %
+% TRASHCAN  %
+% % % % % % %
+%%%%%%%%%%%%%
+%%
+%Skript um States zu extrahieren und zu plotten
+%Erzeugt Grafiken der States
+    %first load states
+    %second mk folder to print files
+    %then skript
+a=figure;
+for m = 1:62
+for n = 1 : 121
+    cfg(n,:)=tmp_x{n}(m,:);
+end
+plot(cfg')
+print(a,'-dpng',strcat('SOF0N1_States(',num2str(m),').png'))
 end
 
 %%
@@ -177,8 +186,8 @@ m.plot(t,y)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %Hatze
-[signal,T,qH]=myHatze(1,1,0,11,4.4525,3);
-plot(T,qH,signal.Time,signal.Data);
+[signal,T,qH]=myHatze(106,1,0,11,4.4525,3);
+% plot(T,qH,signal.Time,signal.Data);
 
 %%
 %Signal

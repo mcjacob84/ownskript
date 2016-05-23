@@ -10,6 +10,11 @@ function [signal]=f_getSignal(p,minStim)
             signal.Time=[0,0.5,3.5,3.5+1e-12,6.5];
             signal.Data=[0,0,1,1,0];
             signal.totalTime=[6.5];
+        case 2 %aus Steady-State heraus
+            %%Verwerfbar! SteadyState nicht erreichbar im Modell!
+            signal.Time=[0,5,5+1e-12,25];
+            signal.Data=[0,0,1,1];
+            signal.totalTime=[25];
         
         %Studienarbeit
         case 101

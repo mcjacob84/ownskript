@@ -1,5 +1,6 @@
 function [ HvSerr ] = f_findSigma( sigma )
 %method to translate sigma from Hatze to Shorten
+%finding corresponding sigma of Shorten zu sigma of Hatze
 %start with: [sigma,fval]=fminsearch(@f_findSigma,1)  
     
     %cfg
