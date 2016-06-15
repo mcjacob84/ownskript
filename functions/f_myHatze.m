@@ -1,3 +1,5 @@
+%% Skript to generate Hatze
+
 function [signal,T,q,force]=myHatze(Data,maxStim,minStim,m,rhoC,v,lCErel,lrho,qH0)
 
 if nargin < 9

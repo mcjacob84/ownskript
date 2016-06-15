@@ -27,6 +27,26 @@ end
 % % % % % % %
 %%%%%%%%%%%%%
 %%
+%Project: MouseVsManVsGiant
+
+load('MouseVsMenVsGiant1_Noise1_c106_stim1_ParamNum0.mat','forces');
+force1=forces;
+load('MouseVsMenVsGiant2_Noise1_c106_stim1_ParamNum0.mat','forces');
+forces2=forces;
+load('MouseVsMenVsGiant3_Noise1_c106_stim1_ParamNum0.mat','forces');
+forces3=forces;
+load('MouseVsMenVsGiant4_Noise1_c106_stim1_ParamNum0.mat','forces');
+forces4=forces;
+
+%ändere Ordner
+force1=f_myPool(forces1);
+force2=f_myPool(forces2);
+force3=f_myPool(forces3);
+force4=f_myPool(forces4);
+
+
+
+%%
 %Skript um States zu extrahieren und zu plotten
 %Erzeugt Grafiken der States
     %first load states

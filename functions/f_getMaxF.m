@@ -1,25 +1,5 @@
-function [ out ] = f_normShorten2( in, numMU )
-    
-    P = f_getExp(100,numMU);
-    
-    force = zeros(1,length(in));
-    for n = 1:numMU   
-        force(1,:)=force(1,:)+(in(n,:)*P(1,n));
-    end
-    maxF=f_getMaxF(numMU);
-    out=force./maxF;
-    
-end
-
-function [ P ] = f_getExp( const,numMU )
-%Beruecksichtigung Groessenordnung der Motoneuronen nach Fuglevand
-P = zeros(1,numMU);
-for n = 1 : numMU
-    P(1,n) = exp(log(const)*(n-1)/(numMU-1)); 
-end
-end
-
 function [ maxF ] = f_getMaxF( MU )
+% Function to get max Force depending on amount of siulated Musclefibres
     switch MU
         case 2
             maxF=1.6137e+03;
@@ -53,3 +33,4 @@ function [ maxF ] = f_getMaxF( MU )
             maxF=4.4288e+04;
     end        
 end
+

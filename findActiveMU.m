@@ -1,5 +1,5 @@
-%Anzahl an Fasern die Kraft erzeugen über sigma
-%+force_recruitedMU_relationship!
+%% Anzahl an Fasern die Kraft erzeugen über sigma
+% +force_recruitedMU_relationship!
 
 %cfg
 useData='SO'; %use data von sarcoNeumann or sarcoOriginal

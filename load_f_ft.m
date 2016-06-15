@@ -1,4 +1,4 @@
-%Skript to read out firetimes of States ("tmp_x")
+%% Skript to read out firetimes of States ("tmp_x")
 
 %cfg
 useData='SO';

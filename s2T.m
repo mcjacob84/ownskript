@@ -1,4 +1,30 @@
-%Demonstrationen für Besprechung
+%% Demonstrationen für Besprechung
+
+
+
+
+
+
+
+%% %%%%%%%%% %%
+%% Old stuff %%
+%% %%%%%%%%% %%
+%% Kurzes Skript, um NaNs aus CoV rauszuwerfen und mean zu berechnen. 
+% Glaube bessere Version bereits vorhanden.
+% Kann eventuell verworfen werden!
+for n=1:length(CoV(:,1))
+    tmp=0;
+    k=0;
+    for m=9:length(CoV(1,:))
+        if ~isnan(CoV(n,m))
+            tmp=tmp+CoV(n,m);
+            k=k+1;
+        end
+        mean1(1,n)=tmp/k;
+    end
+end
+    
+
 %%
 
 %Lese Zeilenweise (über Stimulation) die ganzen Zahlen aus und bilde
@@ -58,17 +84,17 @@ diff=mfpot-firetimes;
 %%
 %mfpot und ft peakFinder untereinander darstellen
 %cfg
-cfg.stim=0.25;
-cfg.fibre=120;
+cfg.stim=0.1;
+cfg.fibre=1;
 
 figure;
 plot_Motoneuron = subplot(2,1,1);
 %title('Motoneuron')
-f_peakFinder_FT(cfg.stim,cfg.fibre,1);
+f_peakFinder(cfg.stim,cfg.fibre,1,1);
 
 plot_Muskelfaser = subplot(2,1,2);
 %title('Muskelfaser')
-f_peakFinder_mfpot(cfg.stim,cfg.fibre,1);
+f_peakFinder(cfg.stim,cfg.fibre,1,2);
 
 linkaxes([plot_Motoneuron, plot_Muskelfaser],'xy')
 
@@ -106,6 +132,10 @@ s2=std(F2);
 for n = 1:121
     CoV2(1,n)=s2(n)/m2(n)*100;
 end
+
+%glaub nur mean und std über forces hatte interessiert
+meanForces=mean(forces');
+standForces=stdd(forces');
 
 %CoV1 forces über die Stimulationen
 %immer CoV des Min über alle MUs und des Max ueber alle MUs

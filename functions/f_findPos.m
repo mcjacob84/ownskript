@@ -1,5 +1,6 @@
 function [ out ] = f_findPos( in )
-%Für Darstellung der Zitkonstanten
+%% Für Darstellung der Zitkonstanten
+% aus Studienarbeit?
 
 in=in/max(in);
 
